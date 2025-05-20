@@ -8,7 +8,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("主界面")
         bt = QPushButton("按我一下")
-        bt.setChecked(True)
+        bt.setCheckable(True)
         #发送事件
         bt.clicked.connect(self.bt_was_clicked)
         bt.clicked.connect(self.bt_was_toggled)
