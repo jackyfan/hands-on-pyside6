@@ -4,4 +4,5 @@ import sys
 app = QApplication(sys.argv)
 window = QWidget()
 window.show()
+#启动事件循环
 app.exec_()
