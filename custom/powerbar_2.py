@@ -4,6 +4,13 @@ from PySide6 import QtCore, QtGui, QtWidgets
 
 
 class _Bar(QtWidgets.QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding,
+                           QtWidgets.QSizePolicy.MinimumExpanding)
+
+    def sizeHint(self):
+        return QtCore.QSize(40,120)
 
     def paintEvent(self, ev):
         painter = QtGui.QPainter(self)
