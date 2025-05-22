@@ -33,7 +33,9 @@ class _Bar(QtWidgets.QWidget):
         font.setPointSize(10)
         painter.setFont(font)
 
-        painter.drawText(10, 10, "{}-->{}<--{}".format(vmin, value, vmax))
+        pc = (value - vmin) / (vmax - vmin)
+        n_steps_to_draw = int(pc * 5)
+        painter.drawText(25, 25, "{}".format(n_steps_to_draw))
         painter.end()
 
     def _trigger_refresh(self):
