@@ -94,11 +94,26 @@ class PowerBar(QtWidgets.QWidget):
         self._bar._bar_solid_percent = float(f)
         self._bar.update()
 
+    def setNotchesVisible(self, b):
+        return self._dial.setNotchesVisible(b)
+
+    def __getattr__(self, name):
+        if name in self.__dict__:
+            return self[name]
+        try:
+            return getattr(self._dial, name)
+        except AttributeError:
+            raise AttributeError(
+                "'{}' object has no attribute '{}'".format(
+                    self.__class__.__name__, name
+                )
+            )
 
 app = QtWidgets.QApplication(sys.argv)
 bar = PowerBar(steps=["#49006a", "#7a0177", "#ae017e", "#dd3497", "#f768a1", "#fa9fb5", "#fcc5c0", "#fde0dd", "#fff7f3"])
 bar.setBarPadding(2)
 bar.setBarSolidPercent(0.9)
-bar.setBackgroundColor('green')
+bar.setBackgroundColor('gray')
+bar.setNotchesVisible(True)
 bar.show()
 app.exec()
