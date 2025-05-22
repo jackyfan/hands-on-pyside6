@@ -59,4 +59,4 @@ class PowerBar(QtWidgets.QWidget):
 app = QtWidgets.QApplication(sys.argv)
 volume = PowerBar()
 volume.show()
-app.exec_()
+app.exec()
