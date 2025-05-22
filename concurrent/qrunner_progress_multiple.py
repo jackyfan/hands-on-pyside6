@@ -63,6 +63,11 @@ class MainWindow(QMainWindow):
         self.threadpool = QThreadPool()
         print("Multithreading with maximum %d threads" % self.threadpool.maxThreadCount())
 
+        self.timer = QTimer()
+        self.timer.setInterval(100)
+        self.timer.timeout.connect(self.refresh_progress)
+        self.timer.start()
+
     def execute(self):
         worker = Worker()
         worker.signals.progress.connect(self.update_progress)
