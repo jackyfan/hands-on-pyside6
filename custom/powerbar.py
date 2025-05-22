@@ -12,7 +12,7 @@ class _Bar(QtWidgets.QWidget):
     def sizeHint(self):
         return QtCore.QSize(40, 120)
 
-    def paintEvent(self, ev):
+    def paintEvent(self, e):
         painter = QtGui.QPainter(self)
         brush = QtGui.QBrush()
         brush.setColor(QtGui.QColor("black"))
@@ -24,18 +24,23 @@ class _Bar(QtWidgets.QWidget):
         vmin, vmax = dial.minimum(), dial.maximum()
         value = dial.value()
 
-        pen = painter.pen()
-        pen.setColor(QtGui.QColor("red"))
-        painter.setPen(pen)
-
-        font = painter.font()
-        font.setFamily("Times")
-        font.setPointSize(10)
-        painter.setFont(font)
-
         pc = (value - vmin) / (vmax - vmin)
         n_steps_to_draw = int(pc * 5)
-        painter.drawText(25, 25, "{}".format(n_steps_to_draw))
+        padding = 5
+        d_height = painter.device().height() - (padding * 2)
+        d_width = painter.device().width() - (padding * 2)
+        step_size = d_height / 5
+        bar_height = step_size * 0.6
+        brush.setColor(QtGui.QColor("red"))
+        for n in range(n_steps_to_draw):
+            ypos = (1 + n) * step_size
+            rect = QtCore.QRect(
+                padding,
+                padding + d_height - int(ypos),
+                d_width,
+                int(bar_height),
+            )
+            painter.fillRect(rect, brush)
         painter.end()
 
     def _trigger_refresh(self):
