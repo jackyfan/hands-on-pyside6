@@ -14,8 +14,8 @@ class PowerBar(QtWidgets.QWidget):
         self._bar = _Bar()
         layout.addWidget(self._bar)
 
-        dial = QtWidgets.QDial()
-        layout.addWidget(dial)
+        self._dial = QtWidgets.QDial()
+        layout.addWidget(self._dial)
 
         self.setLayout(layout)
 
