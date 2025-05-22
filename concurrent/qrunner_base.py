@@ -29,6 +29,8 @@ class Worker(QRunnable):
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.threadpool = QThreadPool()
+        print("Multithreading with maximum %d threads" % self.threadpool.maxThreadCount())
         self.show()
 
 

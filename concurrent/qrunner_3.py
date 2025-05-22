@@ -68,6 +68,7 @@ class MainWindow(QMainWindow):
 
     def do_bad(self):
         worker = Worker(iterations=random.randint(10, 50))
+        #注册插槽
         worker.signals.result.connect(self.worker_output)
         worker.signals.finished.connect(self.worker_complete)
         worker.signals.error.connect(self.worker_error)
