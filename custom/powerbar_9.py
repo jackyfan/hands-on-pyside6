@@ -74,7 +74,7 @@ class _Bar(QtWidgets.QWidget):
         self.clickedValue.emit(value)
 
     def mouseMoveEvent(self, e):
-        print("mouseMoveEvent:{}", e)
+        print(e)
         self._calculate_clicked_value(e)
 
     def mousePressEvent(self, e):
