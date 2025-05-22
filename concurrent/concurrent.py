@@ -22,7 +22,7 @@ class MainWindow(QMainWindow):
 
         self.l = QLabel("Start")
         b = QPushButton("DANGER!")
-        b.pressed.connect(self.sleep)
+        b.pressed.connect(self.do_bad)
 
         layout.addWidget(self.l)
         layout.addWidget(b)
@@ -30,7 +30,6 @@ class MainWindow(QMainWindow):
         w.setLayout(layout)
 
         self.setCentralWidget(w)
-
         self.show()
 
         self.timer = QTimer()
@@ -38,7 +37,7 @@ class MainWindow(QMainWindow):
         self.timer.timeout.connect(self.recurring_timer)
         self.timer.start()
 
-    def sleep(self):
+    def do_bad(self):
         time.sleep(5)
 
     def recurring_timer(self):
