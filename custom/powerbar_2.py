@@ -10,7 +10,7 @@ class _Bar(QtWidgets.QWidget):
                            QtWidgets.QSizePolicy.MinimumExpanding)
 
     def sizeHint(self):
-        return QtCore.QSize(40,120)
+        return QtCore.QSize(40, 120)
 
     def paintEvent(self, ev):
         painter = QtGui.QPainter(self)
@@ -20,6 +20,25 @@ class _Bar(QtWidgets.QWidget):
         rect = QtCore.QRect(0, 0, painter.device().width(), painter.device().height())
         painter.fillRect(rect, brush)
 
+        dial = self.parent()._dial
+        vmin, vmax = dial.minimum(), dial.maximum()
+        value = dial.value()
+
+        pen = painter.pen()
+        pen.setColor(QtGui.QColor("red"))
+        painter.setPen(pen)
+
+        font = painter.font()
+        font.setFamily("Times")
+        font.setPointSize(10)
+        painter.setFont(font)
+
+        painter.drawText(10, 10, "{}-->{}<--{}".format(vmin, value, vmax))
+        painter.end()
+
+    def _trigger_refresh(self):
+        self.update()
+
 
 class PowerBar(QtWidgets.QWidget):
     def __init__(self, parent=None, step=5):
@@ -28,8 +47,9 @@ class PowerBar(QtWidgets.QWidget):
         self._bar = _Bar()
         layout.addWidget(self._bar)
 
-        dial = QtWidgets.QDial()
-        layout.addWidget(dial)
+        self._dial = QtWidgets.QDial()
+        self._dial.valueChanged.connect(self._bar._trigger_refresh)
+        layout.addWidget(self._dial)
 
         self.setLayout(layout)
 
