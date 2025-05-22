@@ -7,7 +7,11 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         layout = QHBoxLayout()
-        powerbar = PowerBar(steps=6)
+        powerbar = PowerBar(steps=["#49006a", "#7a0177", "#ae017e", "#dd3497", "#f768a1", "#fa9fb5", "#fcc5c0", "#fde0dd", "#fff7f3"])
+        powerbar.setBarPadding(2)
+        powerbar.setBarSolidPercent(0.9)
+        powerbar.setBackgroundColor('gray')
+        powerbar.setNotchesVisible(True)
         layout.addWidget(powerbar)
         container = QWidget()
         container.setLayout(layout)
