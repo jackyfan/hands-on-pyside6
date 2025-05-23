@@ -9,6 +9,8 @@ from PySide6.QtCore import (
 from PySide6.QtWidgets import (
     QApplication,
     QMainWindow,
+    QWidget,
+    QLayout
 )
 
 
@@ -20,15 +22,21 @@ class Worker(QRunnable):
     def __init__(self):
         super().__init__()
         self.signals = WorkSignals()
+
     @Slot()
     def run(self):
         pass
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.threadpool = QThreadPool()
         print("Multithreading with maximum %d threads" % self.threadpool.maxThreadCount())
+        layout = QLayout()
+        container = QWidget()
+        container.setLayout(layout)
+        self.setCentralWidget(container)
         self.show()
 
 
