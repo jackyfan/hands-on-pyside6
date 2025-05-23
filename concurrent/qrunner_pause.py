@@ -36,6 +36,7 @@ class Worker(QRunnable):
 
                 #进入循环，不会退出
                 while self.is_paused:
+                    #您必须包含 time.sleep（） 调用。这种零秒暂停允许 Python 释放 GIL，因此此循环不会阻止其他执行
                     time.sleep(0)
 
                 if self.is_killed:
