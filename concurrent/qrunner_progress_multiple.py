@@ -90,7 +90,6 @@ class MainWindow(QMainWindow):
     def refresh_progress(self):
         # Calculate total progress.
         progress = self.calculate_progress()
-        print(self.worker_progress)
         self.progress.setValue(progress)
         self.status.setText("%d只牛马" % len(self.worker_progress))
 
