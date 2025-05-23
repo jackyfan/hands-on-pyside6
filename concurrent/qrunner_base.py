@@ -10,7 +10,7 @@ from PySide6.QtWidgets import (
     QApplication,
     QMainWindow,
     QWidget,
-    QLayout
+    QVBoxLayout
 )
 
 
@@ -33,7 +33,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.threadpool = QThreadPool()
         print("Multithreading with maximum %d threads" % self.threadpool.maxThreadCount())
-        layout = QLayout()
+        layout = QVBoxLayout()
         container = QWidget()
         container.setLayout(layout)
         self.setCentralWidget(container)
