@@ -40,6 +40,7 @@ class WorkerManager(QAbstractListModel):
         self.threadpool = QThreadPool()
         self.max_threads = self.threadpool.maxThreadCount()
         print("Multithreading with maximum %d threads" % self.max_threads)
+        self.finished_workers = 0
 
         self.status_timer = QTimer()
         self.status_timer.setInterval(100)
@@ -50,7 +51,7 @@ class WorkerManager(QAbstractListModel):
         n_workers = len(self._workers)
         running = min(n_workers, self.max_threads)
         waiting = max(0, n_workers - self.max_threads)
-        self.status.emit("{} running,{} waiting,{} threads".format(running, waiting, self.max_threads))
+        self.status.emit("{} running,{} waiting,{} finished,{} threads".format(running, waiting, self.finished_workers, self.max_threads))
 
     def enqueue(self, worker):
         """
@@ -87,6 +88,7 @@ class WorkerManager(QAbstractListModel):
         display past/complete workers too.
         """
         del self._workers[job_id]
+        self.finished_workers += 1
         self.layoutChanged.emit()
 
     def cleanup(self):
